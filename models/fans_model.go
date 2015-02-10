@@ -1,13 +1,14 @@
 package models
 
 import (
-	"aliyunMQS_consumber/libs"
 	"fmt"
 	//"log"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego/orm"
+
+	"github.com/congjunwei/aliyunMQS_consumber/libs"
 )
 
 type Fans struct {

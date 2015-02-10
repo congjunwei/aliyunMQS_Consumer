@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"strings"
 
-	"aliyunMQS_consumber/libs"
-	"aliyunMQS_consumber/models"
+	"github.com/congjunwei/aliyunMQS"
+	"github.com/congjunwei/aliyunMQS_consumber/libs"
+	"github.com/congjunwei/aliyunMQS_consumber/models"
 
 	"github.com/Unknwon/goconfig"
-	"github.com/congjunwei/aliyunMQS"
 )
 
 type CreateTopicQueue struct {
