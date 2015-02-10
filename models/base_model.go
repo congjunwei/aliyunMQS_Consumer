@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/congjunwei/aliyunMQS_Consumber/libs/config"
+	"github.com/congjunwei/aliyunMQS_Consumer/libs/config"
 
 	"github.com/astaxie/beego/orm"
 )

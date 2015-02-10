@@ -9,7 +9,7 @@ import (
 
 	"github.com/garyburd/redigo/redis"
 
-	"github.com/congjunwei/aliyunMQS_Consumber/libs/config"
+	"github.com/congjunwei/aliyunMQS_Consumer/libs/config"
 )
 
 var master_pool *redis.Pool

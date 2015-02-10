@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"github.com/congjunwei/aliyunMQS_Consumber/libs"
-	"github.com/congjunwei/aliyunMQS_Consumber/queues"
+	"github.com/congjunwei/aliyunMQS_Consumer/libs"
+	"github.com/congjunwei/aliyunMQS_Consumer/queues"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )

@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"github.com/congjunwei/aliyunMQS_Consumber/libs"
+	"github.com/congjunwei/aliyunMQS_Consumer/libs"
 	//"log"
 	"strconv"
 	"strings"
