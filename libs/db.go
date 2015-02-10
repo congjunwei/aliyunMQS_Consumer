@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Unknwon/goconfig"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
+
+	"aliyunMQS_consumber/libs/config"
 )
 
 //var Cfg = beego.AppConfig
@@ -20,35 +21,26 @@ func Initdb() {
 	if err := orm.RegisterDriver("mysql", orm.DR_MySQL); err != nil {
 		panic(fmt.Errorf("无法注册MySQL驱动"))
 	}
+	maxIdleConn := config.CfgGetInt("max_idle_conn")
+	maxOpenConn := config.CfgGetInt("max_open_conn")
 
-	cfg, err := goconfig.LoadConfigFile("conf/config.ini")
-	if err != nil {
-		log.Printf("配置文件没有找到，err:%s", err)
-	}
-	runmode, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "runmode")
+	dbUser, err := config.CfgGetString("master_user")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	maxIdleConn := cfg.MustInt(runmode, "max_idle_conn")
-	maxOpenConn := cfg.MustInt(runmode, "max_open_conn")
-
-	dbUser, err := cfg.GetValue(runmode, "master_user")
+	dbPass, err := config.CfgGetString("master_pass")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	dbPass, err := cfg.GetValue(runmode, "master_pass")
+	dbHost, err := config.CfgGetString("master_host")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	dbHost, err := cfg.GetValue(runmode, "master_host")
+	dbPort, err := config.CfgGetString("master_port")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	dbPort, err := cfg.GetValue(runmode, "master_port")
-	if err != nil {
-		log.Printf("配置文件错误，err:%s", err)
-	}
-	dbName, err := cfg.GetValue(runmode, "master_name")
+	dbName, err := config.CfgGetString("master_name")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
@@ -59,23 +51,23 @@ func Initdb() {
 		panic(fmt.Errorf("无法连接Master数据库%v", err))
 	}
 
-	slave1dbUser, err := cfg.GetValue(runmode, "slave1_user")
+	slave1dbUser, err := config.CfgGetString("slave1_user")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	slave1dbPass, err := cfg.GetValue(runmode, "slave1_pass")
+	slave1dbPass, err := config.CfgGetString("slave1_pass")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	slave1dbHost, err := cfg.GetValue(runmode, "slave1_host")
+	slave1dbHost, err := config.CfgGetString("slave1_host")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	slave1dbPort, err := cfg.GetValue(runmode, "slave1_port")
+	slave1dbPort, err := config.CfgGetString("slave1_port")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	slave1dbName, err := cfg.GetValue(runmode, "slave1_name")
+	slave1dbName, err := config.CfgGetString("slave1_name")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}

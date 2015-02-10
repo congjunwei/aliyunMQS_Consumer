@@ -7,8 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Unknwon/goconfig"
 	"github.com/garyburd/redigo/redis"
+
+	"aliyunMQS_consumber/libs/config"
 )
 
 var master_pool *redis.Pool
@@ -16,49 +17,34 @@ var slave_pool *redis.Pool
 
 //组装cache的key
 func CacheKey(key string) string {
-	cfg, err := goconfig.LoadConfigFile("conf/config.ini")
-	if err != nil {
-		log.Printf("配置文件没有找到，err:%s", err)
-	}
-	runmode, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "runmode")
-	if err != nil {
-		log.Printf("配置文件错误，err:%s", err)
-	}
+	runmode := config.Runmode
 	return fmt.Sprintf("juzi-caochang_1.0_%s_%s", runmode, key)
+
 }
 
 func InitRedis() {
-	//主Redis
-	cfg, err := goconfig.LoadConfigFile("conf/config.ini")
-	if err != nil {
-		log.Printf("配置文件没有找到，err:%s", err)
-	}
-	runmode, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "runmode")
+	master_host, err := config.CfgGetString("master_redishost")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	master_host, err := cfg.GetValue(runmode, "master_redishost")
+	master_port, err := config.CfgGetString("master_redisport")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	master_port, err := cfg.GetValue(runmode, "master_redisport")
-	if err != nil {
-		log.Printf("配置文件错误，err:%s", err)
-	}
-	master_pass, err := cfg.GetValue(runmode, "master_redispassword")
+	master_pass, err := config.CfgGetString("master_redispassword")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
 
-	slave_host, err := cfg.GetValue(runmode, "slave_redishost")
+	slave_host, err := config.CfgGetString("slave_redishost")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	slave_port, err := cfg.GetValue(runmode, "slave_redisport")
+	slave_port, err := config.CfgGetString("slave_redisport")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}
-	slave_pass, err := cfg.GetValue(runmode, "slave_redispassword")
+	slave_pass, err := config.CfgGetString("slave_redispassword")
 	if err != nil {
 		log.Printf("配置文件错误，err:%s", err)
 	}

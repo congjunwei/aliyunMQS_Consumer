@@ -6,7 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/Unknwon/goconfig"
+	"aliyunMQS_consumber/libs/config"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -20,19 +21,12 @@ func init() {
 
 //返回带前缀的表名
 func TableName(str string) string {
-	cfg, err := goconfig.LoadConfigFile("conf/config.ini")
-	if err != nil {
-		log.Printf("配置文件没有找到，err:%s", err)
-	}
-	runmode, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "runmode")
-	if err != nil {
-		log.Printf("配置文件错误，err:%s", err)
-	}
-
-	mysqlprefix, err := cfg.GetValue(runmode, "mysqlprefix")
+	mysqlprefix, err := config.Cfg.GetValue(config.Runmode, "mysqlprefix")
 	if err != nil {
 		log.Printf("配置文件错误11，err:%s", err)
 	}
+
+	//log.Printf("mysqlprefix:%s", mysqlprefix)
 	return fmt.Sprintf("%s%s", mysqlprefix, str)
 }
 
