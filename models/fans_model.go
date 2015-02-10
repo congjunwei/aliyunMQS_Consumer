@@ -1,8 +1,8 @@
 package models
 
 import (
-	"aliyunMQS_consumber/libs"
 	"fmt"
+	"github.com/congjunwei/aliyunMQS_Consumber/libs"
 	//"log"
 	"strconv"
 	"strings"

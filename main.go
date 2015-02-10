@@ -1,8 +1,8 @@
 package main
 
 import (
-	"aliyunMQS_consumber/libs"
-	"aliyunMQS_consumber/queues"
+	"github.com/congjunwei/aliyunMQS_Consumber/libs"
+	"github.com/congjunwei/aliyunMQS_Consumber/queues"
 )
 
 func main() {

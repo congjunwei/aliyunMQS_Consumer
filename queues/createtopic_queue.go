@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"aliyunMQS_consumber/libs"
-	"aliyunMQS_consumber/models"
+	"github.com/congjunwei/aliyunMQS_Consumber/libs"
+	"github.com/congjunwei/aliyunMQS_Consumber/models"
 
 	"github.com/Unknwon/goconfig"
 	"github.com/congjunwei/aliyunMQS"

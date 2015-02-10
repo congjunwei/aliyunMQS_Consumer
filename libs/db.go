@@ -7,7 +7,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 
-	"aliyunMQS_consumber/libs/config"
+	"github.com/congjunwei/aliyunMQS_Consumber/libs/config"
 )
 
 //var Cfg = beego.AppConfig
