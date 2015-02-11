@@ -7,12 +7,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/congjunwei/aliyunMQS"
 	"github.com/congjunwei/aliyunMQS_Consumer/libs"
 	"github.com/congjunwei/aliyunMQS_Consumer/libs/config"
 	"github.com/congjunwei/aliyunMQS_Consumer/models"
-
-	"github.com/Unknwon/goconfig"
-	"github.com/congjunwei/aliyunMQS"
 )
 
 type CreateTopicQueue struct {
@@ -45,8 +43,8 @@ func (this *CreateTopicQueue) Run() {
 
 	msg.NewMQS(accessKey, accessSecret, queueOwnId, mqsUrl)
 	//go func() {
-	log.Printf("createtopic消费....")
 	for {
+		log.Printf("createtopic消费,开始处理....")
 		if content, err := msg.ReceiveMessage(queuename, waitseconds); err != nil {
 			log.Printf("err:%v,content:%s", err, content)
 		} else {
@@ -72,7 +70,7 @@ func (this *CreateTopicQueue) Run() {
 				log.Printf("处理消息失败,receipthandle:%s", receipthandle)
 			}
 		}
-		log.Printf("本消息处理完毕了！！！！")
+		log.Printf("createtopic消费-本消息处理完毕了！！！！")
 	}
 	//	}()
 }

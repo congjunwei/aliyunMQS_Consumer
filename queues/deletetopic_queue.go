@@ -7,11 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/congjunwei/aliyunMQS_Consumer/libs"
-	"github.com/congjunwei/aliyunMQS_Consumer/models"
-
-	"github.com/Unknwon/goconfig"
 	"github.com/congjunwei/aliyunMQS"
+	"github.com/congjunwei/aliyunMQS_Consumer/libs"
+	"github.com/congjunwei/aliyunMQS_Consumer/libs/config"
+	"github.com/congjunwei/aliyunMQS_Consumer/models"
 )
 
 type DeleteTopicQueue struct {
@@ -25,25 +24,21 @@ func (this *DeleteTopicQueue) Run() {
 	queuename := "deletetopic"
 	waitseconds := 30
 
-	cfg, err := goconfig.LoadConfigFile("conf/config.ini")
+	accessKey, err := config.Cfg.GetValue(config.Runmode, "accessKey")
 	if err != nil {
-		log.Printf("配置文件没有找到，err:%s", err)
+		log.Printf("配置文件错误accessKey,err:%s", err)
 	}
-	accessKey, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "accessKey")
+	accessSecret, err := config.Cfg.GetValue(config.Runmode, "accessSecret")
 	if err != nil {
-		log.Printf("配置错误,accessKey,err:%s", err)
+		log.Printf("配置文件错误accessKey,err:%s", err)
 	}
-	accessSecret, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "accessSecret")
+	queueOwnId, err := config.Cfg.GetValue(config.Runmode, "queueOwnId")
 	if err != nil {
-		log.Printf("配置错误,accessSecret,err:%s", err)
+		log.Printf("配置文件错误accessKey,err:%s", err)
 	}
-	queueOwnId, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "queueOwnId")
+	mqsUrl, err := config.Cfg.GetValue(config.Runmode, "mqsUrl")
 	if err != nil {
-		log.Printf("配置错误,queueOwnId,err:%s", err)
-	}
-	mqsUrl, err := cfg.GetValue(goconfig.DEFAULT_SECTION, "mqsUrl")
-	if err != nil {
-		log.Printf("配置错误,mqsUrl,err:%s", err)
+		log.Printf("配置文件错误accessKey,err:%s", err)
 	}
 
 	msg.NewMQS(accessKey, accessSecret, queueOwnId, mqsUrl)
