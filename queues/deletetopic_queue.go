@@ -43,8 +43,8 @@ func (this *DeleteTopicQueue) Run() {
 
 	msg.NewMQS(accessKey, accessSecret, queueOwnId, mqsUrl)
 	//go func() {
-	log.Printf("deletetopic消费....")
 	for {
+		log.Printf("deletetopic消费,开始处理....")
 		if content, err := msg.ReceiveMessage(queuename, waitseconds); err != nil {
 			log.Printf("err:%v,content:%s", err, content)
 		} else {
@@ -70,7 +70,7 @@ func (this *DeleteTopicQueue) Run() {
 				log.Printf("处理消息失败,receipthandle:%s", receipthandle)
 			}
 		}
-		log.Printf("本消息处理完毕了！！！！")
+		log.Printf("deletetopic消费-本消息处理完毕了！！！！")
 	}
 	//}()
 }

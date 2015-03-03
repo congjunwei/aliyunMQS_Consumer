@@ -22,5 +22,4 @@ type xmlMessage struct {
 }
 
 func init() {
-
 }
