@@ -17,8 +17,8 @@ var slave_pool *redis.Pool
 
 //组装cache的key
 func CacheKey(key string) string {
-	runmode := config.Runmode
-	return fmt.Sprintf("juzi-caochang_1.0_%s_%s", runmode, key)
+	//runmode := config.Runmode
+	return fmt.Sprintf("juzi-caochang_1.0_%s_%s", "prod", key)
 
 }
 

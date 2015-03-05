@@ -92,7 +92,9 @@ func (this *CreateTopicQueue) process(messagebody string) error {
 	}
 
 	var fans models.Fans
+	log.Printf("uid:%d", uid)
 	if list := fans.GetFansList(uid); len(list) > 0 {
+		log.Printf("fanlist%v+", list)
 		for _, v := range list {
 			if err := this.AddInboxCache(v, topicid, ctime); err != nil {
 				return err

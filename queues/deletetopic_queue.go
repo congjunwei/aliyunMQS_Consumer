@@ -53,6 +53,7 @@ func (this *DeleteTopicQueue) Run() {
 			if err != nil {
 				log.Printf("读取消息队列返回xml解析失败,content:%s", content)
 			}
+			log.Printf("step1====>")
 			receipthandle := object.ReceiptHandle
 			body := object.MessageBody
 			dequeuecount := object.DequeueCount
@@ -61,6 +62,7 @@ func (this *DeleteTopicQueue) Run() {
 				continue
 			}
 			if err := this.process(body); err == nil {
+				log.Printf("处理删除====>")
 				if content, err := msg.DeleteMessage(queuename, receipthandle); err != nil {
 					log.Printf("删除消息失败,receipthandle:%s,content:%s", receipthandle, content)
 				} else {
@@ -88,6 +90,7 @@ func (this *DeleteTopicQueue) process(messagebody string) error {
 		return err
 	}
 
+	log.Printf("step1====>uid:%d,topicid:%d", uid, topicid)
 	var fans models.Fans
 	if list := fans.GetFansList(uid); len(list) > 0 {
 		for _, v := range list {
