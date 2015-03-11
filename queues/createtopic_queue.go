@@ -21,7 +21,7 @@ func (this *CreateTopicQueue) Run() {
 	var msg aliyunMQS.Message
 	var object xmlMessage
 	//var accesskey, accesssecret, queueownid, mqsurl string
-	queuename := "createtopic"
+	queuename := fmt.Sprintf("%s-createtopic", config.Runmode)
 	waitseconds := 30
 
 	accessKey, err := config.Cfg.GetValue(config.Runmode, "accessKey")

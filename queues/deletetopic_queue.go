@@ -21,7 +21,7 @@ func (this *DeleteTopicQueue) Run() {
 	var msg aliyunMQS.Message
 	var object xmlMessage
 	//var accesskey, accesssecret, queueownid, mqsurl string
-	queuename := "deletetopic"
+	queuename := fmt.Sprintf("%s-deletetopic", config.Runmode)
 	waitseconds := 30
 
 	accessKey, err := config.Cfg.GetValue(config.Runmode, "accessKey")
